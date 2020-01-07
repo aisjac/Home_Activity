@@ -29,6 +29,7 @@ import com.example.home_activity.R;
 import com.example.home_activity.UpdateActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     RecyclerView recyclerView;
 
     private DatabaseReference databaseReference;
+    private DatabaseReference userReference;
 
 
     public MyAdapter(List<AddData> myItem, Context context) {
@@ -59,7 +61,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
         final AddData itemPosition = MyItem.get(i);
 
         myViewHolder.cardView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_scale_animation));
@@ -88,6 +90,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
 
         myViewHolder.optionDot.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
 
@@ -102,8 +106,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
                         switch (item.getItemId()) {
                             case R.id.editId:
+
+
+                                MyItem.remove(i);
+
                                 //handle menu1 click
-                                Toast.makeText(context, "Item Edit Clicked !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Item Edit Clicked !"+i, Toast.LENGTH_SHORT).show();
                                 return true;
 
                             case R.id.deleteId:
