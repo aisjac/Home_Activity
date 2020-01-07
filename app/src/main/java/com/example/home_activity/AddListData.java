@@ -89,11 +89,9 @@ public class AddListData extends AppCompatActivity {
                         && !TextUtils.isEmpty(user_nidnumber)
                         && !TextUtils.isEmpty(user_address) && (user_nidnumber.length() == 10 || user_nidnumber.length() == 17)){
 
-                    String myCurrentDateTime = DateFormat.getDateTimeInstance()
-                            .format(Calendar.getInstance().getTime());
+                    String myCurrentDateTime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
                     AddData sendData = new AddData(user_fullName,user_fatherName,user_motherName,user_nidnumber,user_address);
-                    FirebaseDatabase.getInstance().getReference("Users")
-                            .child(myCurrentDateTime).setValue(sendData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    FirebaseDatabase.getInstance().getReference("Users").child(myCurrentDateTime).setValue(sendData).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
